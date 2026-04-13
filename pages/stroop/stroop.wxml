@@ -1,0 +1,85 @@
+<custom-nav title="文字干扰测试" showBack="{{true}}"></custom-nav>
+
+<view class="container" style="padding-top: {{navBarHeight}}px;">
+  <view class="header">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{round / maxRounds * 100}}%"></view>
+    </view>
+    <view class="header-info">
+      <text class="round-text">{{round}}/{{maxRounds}}</text>
+      <text class="score-text">得分: {{score}}</text>
+    </view>
+  </view>
+
+  <view class="main-content">
+    <view class="ready-area" wx:if="{{status === 'ready'}}">
+      <text class="ready-icon">🎨</text>
+      <text class="ready-title">文字干扰测试</text>
+      <text class="ready-desc">选择文字的颜色，而不是文字的含义</text>
+      <view class="example">
+        <text class="example-word" style="color: #FF6B6B">蓝</text>
+        <text class="example-hint">这个字是红色的，应该选择"红色"</text>
+      </view>
+    </view>
+
+    <view class="test-area" wx:if="{{status === 'testing' && currentWord}}">
+      <view class="word-display {{showFeedback ? feedbackType : ''}}">
+        <text class="word-text" style="color: {{currentWord.color}}">{{currentWord.text}}</text>
+      </view>
+
+      <view class="color-options">
+        <view 
+          class="color-btn" 
+          wx:for="{{colors}}" 
+          wx:key="code"
+          data-color="{{item.code}}"
+          bindtap="handleColorSelect"
+        >
+          <view class="color-circle" style="background: {{item.value}};"></view>
+          <text class="color-label">{{item.name}}</text>
+        </view>
+      </view>
+
+      <view class="feedback {{feedbackType}}" wx:if="{{showFeedback}}">
+        <text class="feedback-text">{{feedbackType === 'correct' ? '✓ 正确！' : '✗ 错误！'}}</text>
+      </view>
+    </view>
+
+    <view class="result-area" wx:if="{{status === 'result'}}">
+      <view class="result-main">
+        <text class="result-score">{{score}}</text>
+        <text class="result-label">最终得分</text>
+      </view>
+
+      <view class="result-stats">
+        <view class="stat-item">
+          <text class="stat-value">{{correctCount}}/{{totalQuestions}}</text>
+          <text class="stat-label">正确率</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{avgTime}}ms</text>
+          <text class="stat-label">平均反应</text>
+        </view>
+      </view>
+
+      <view class="new-best" wx:if="{{isNewBest}}">
+        <text class="new-best-text">🎉 新纪录！</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="action-buttons" wx:if="{{status === 'ready'}}">
+    <view class="btn btn-primary" bindtap="startTest">
+      <text class="btn-text">开始测试</text>
+    </view>
+  </view>
+
+  <view class="action-buttons" wx:if="{{status === 'result'}}">
+    <view class="btn btn-primary" bindtap="resetTest">
+      <text class="btn-text">再测一次</text>
+    </view>
+    <view class="btn btn-secondary" catchtap="navigateToResult">
+      <text class="btn-text">查看详情</text>
+    </view>
+  </view>
+</view>

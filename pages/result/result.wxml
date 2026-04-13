@@ -1,0 +1,81 @@
+<custom-nav title="测试结果" showBack="{{true}}"></custom-nav>
+
+<view class="container" style="padding-top: {{navBarHeight}}px;">
+  <!-- 隐藏的canvas用于生成分享图片 -->
+  <canvas canvas-id="shareCanvas" style="position: fixed; width: 540px; height: 720px; left: -9999px; top: -9999px;"></canvas>
+
+  <view class="header">
+    <text class="title">{{type === 'reaction' ? '视觉反应' : type === 'cps' ? '手速测试' : type === 'memory' ? '方块记忆' : '文字干扰'}}</text>
+    <text class="subtitle">测试结果</text>
+  </view>
+
+  <view class="result-card">
+    <view class="score-section">
+      <view class="score-main">
+        <text class="score-value">{{displayScore}}</text>
+        <text class="score-unit">{{scoreUnit}}</text>
+      </view>
+      <view class="grade-section" wx:if="{{grade}}" style="background: {{grade.color}}20">
+        <text class="grade-text" style="color: {{grade.color}}">{{grade.description}}</text>
+      </view>
+      <view class="new-best-badge" wx:if="{{isNewBest}}">
+        <text class="badge-text">🎉 新纪录</text>
+      </view>
+    </view>
+
+    <view class="stats-grid" wx:if="{{hasExtraStats}}">
+      <view class="stat-card" wx:if="{{testInfo.clicks}}">
+        <text class="stat-value">{{testInfo.clicks}}</text>
+        <text class="stat-label">总点击</text>
+      </view>
+      <view class="stat-card" wx:if="{{testInfo.count}}">
+        <text class="stat-value">{{testInfo.count}}</text>
+        <text class="stat-label">测试次数</text>
+      </view>
+      <view class="stat-card" wx:if="{{testInfo.avg}}">
+        <text class="stat-value">{{testInfo.avg}}ms</text>
+        <text class="stat-label">平均时间</text>
+      </view>
+      <view class="stat-card" wx:if="{{testInfo.accuracy}}">
+        <text class="stat-value">{{testInfo.accuracy}}%</text>
+        <text class="stat-label">正确率</text>
+      </view>
+      <view class="stat-card" wx:if="{{testInfo.avgTime}}">
+        <text class="stat-value">{{testInfo.avgTime}}ms</text>
+        <text class="stat-label">平均反应</text>
+      </view>
+      <view class="stat-card" wx:if="{{type === 'memory' && testInfo.totalScore}}">
+        <text class="stat-value">{{testInfo.totalScore}}</text>
+        <text class="stat-label">总得分</text>
+      </view>
+    </view>
+
+    <view class="history-section" wx:if="{{recentScores.length > 0}}">
+      <text class="section-title">最近记录</text>
+      <view class="history-list">
+        <view class="history-item" wx:for="{{recentScores}}" wx:key="timestamp">
+          <text class="history-score">{{item.displayScore}}{{item.unit}}</text>
+          <text class="history-accuracy" wx:if="{{item.accuracy}}">{{item.accuracy}}%</text>
+          <text class="history-time">{{item.formattedTime}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="best-section" wx:if="{{bestScore}}">
+      <text class="section-title">历史最佳</text>
+      <view class="best-card">
+        <text class="best-score">{{bestScore.displayScore}}{{bestScore.unit}}</text>
+        <text class="best-date">{{bestScore.formattedTime}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="action-buttons" wx:if="{{!isHistoryView}}">
+    <view class="btn btn-primary" bindtap="retryTest">
+      <text class="btn-text">再测一次</text>
+    </view>
+    <view class="btn btn-secondary" bindtap="shareResult">
+      <text class="btn-text">分享成绩</text>
+    </view>
+  </view>
+</view>

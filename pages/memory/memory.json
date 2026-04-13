@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "方块记忆",
+  "navigationBarBackgroundColor": "#1C1714",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "backgroundColor": "#1C1714",
+  "disableScroll": true,
+  "usingComponents": {
+    "custom-nav": "/components/custom-nav/custom-nav"
+  }
+}

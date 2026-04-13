@@ -1,0 +1,78 @@
+<custom-nav title="方块记忆" showBack="{{true}}"></custom-nav>
+
+<scroll-view class="container" scroll-y style="padding-top: {{navBarHeight}}px;">
+  <view class="header" wx:if="{{status !== 'ready'}}">
+    <view class="level-badge">
+      <text class="level-text">Level {{level}}</text>
+    </view>
+  </view>
+
+  <view class="game-info" wx:if="{{status !== 'ready'}}">
+    <view class="info-item">
+      <text class="info-label">得分</text>
+      <text class="info-value">{{score}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">序列</text>
+      <text class="info-value">{{sequence.length}}</text>
+    </view>
+  </view>
+
+  <view class="grid-container" wx:if="{{status !== 'ready'}}">
+    <view class="grid">
+      <block wx:for="{{grid}}" wx:key="id">
+        <view 
+          class="grid-cell {{item.active ? 'active' : ''}} {{item.clicked ? 'clicked' : ''}} {{item.wrong ? 'wrong' : ''}} {{showSequence && currentHighlight === index ? 'highlight' : ''}}"
+          data-index="{{index}}"
+          bindtap="handleGridClick"
+        >
+          <view class="cell-inner">
+            <text class="cell-order" wx:if="{{item.clicked && item.clickOrder > 0}}">{{item.clickOrder}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="message-area">
+    <text class="message">{{message}}</text>
+  </view>
+
+  <view class="action-buttons" wx:if="{{status === 'ready'}}">
+    <view class="guide-section">
+      <text class="guide-title">🧠 方块记忆游戏</text>
+      <view class="guide-text">
+        <text class="guide-desc">• 观察方块闪烁的顺序</text>
+        <text class="guide-desc">• 按照相同顺序点击方块</text>
+        <text class="guide-desc">• 每关增加一个方块</text>
+        <text class="guide-desc">• 点错游戏结束</text>
+        <text class="guide-desc">• 挑战更高的关卡吧</text>
+      </view>
+    </view>
+    <view class="btn btn-primary" bindtap="startGame">
+      <text class="btn-text">开始游戏</text>
+    </view>
+  </view>
+
+  <view class="action-buttons" wx:if="{{status === 'success'}}">
+    <view class="btn btn-primary" bindtap="nextLevel">
+      <text class="btn-text">下一关</text>
+    </view>
+  </view>
+
+  <view class="action-buttons" wx:if="{{status === 'result'}}">
+    <view class="result-info">
+      <text class="result-level">最高关卡: {{level - 1}}</text>
+      <text class="result-score">最终得分: {{score}}</text>
+      <view class="new-best" wx:if="{{isNewBest}}">
+        <text class="new-best-text">🎉 新纪录！</text>
+      </view>
+    </view>
+    <view class="btn btn-primary" bindtap="resetGame">
+      <text class="btn-text">重新开始</text>
+    </view>
+    <view class="btn btn-secondary" catchtap="navigateToResult">
+      <text class="btn-text">查看详情</text>
+    </view>
+  </view>
+</scroll-view>

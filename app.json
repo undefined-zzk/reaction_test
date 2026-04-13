@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/reaction/reaction",
+    "pages/cps/cps",
+    "pages/memory/memory",
+    "pages/stroop/stroop",
+    "pages/result/result",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "反应力测试助手",
+    "navigationBarBackgroundColor": "#1C1714",
+    "backgroundColor": "#1C1714",
+    "enableShareAppMessage": true,
+    "enableShareTimeline": true
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

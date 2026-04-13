@@ -1,0 +1,68 @@
+/* Academia/Classical Design System - Global Styles */
+
+/* Font Definitions:
+ * Heading Font: STSong, SimSun, Songti SC (宋体 - elegant serif for headings)
+ * Body Font: STSong, SimSun, Songti SC (宋体 - readable serif for body)
+ * Display Font: STKaiti, KaiTi, Kaiti SC (楷体 - calligraphic for labels)
+ */
+
+page {
+  background-color: #1C1714;
+  font-family: 'STSong', 'SimSun', 'Songti SC', 'Georgia', serif;
+  color: #E8DFD4;
+}
+
+view,
+text {
+  box-sizing: border-box;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+button::after {
+  border: none;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+/* Paper Texture Overlay - Simplified for WeChat */
+page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2rpx,
+    rgba(232, 223, 212, 0.02) 2rpx,
+    rgba(232, 223, 212, 0.02) 4rpx
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Vignette Effect */
+page::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(28, 23, 20, 0.4) 100%);
+  pointer-events: none;
+  z-index: 9999;
+}

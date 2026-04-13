@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "视觉反应测试",
+  "navigationBarBackgroundColor": "#1C1714",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "usingComponents": {
+    "custom-nav": "/components/custom-nav/custom-nav"
+  }
+}

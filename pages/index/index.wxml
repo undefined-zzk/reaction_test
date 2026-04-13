@@ -1,0 +1,37 @@
+<view class="container">
+  <view class="header" style="padding-right: {{headerRight}}px;">
+    <view class="title-section">
+      <text class="main-title">反应力测试助手</text>
+      <text class="subtitle">测试你的极限反应速度</text>
+    </view>
+    <view class="settings-btn" bindtap="navigateToSettings">
+      <text class="settings-icon">⚙️</text>
+    </view>
+  </view>
+
+  <view class="test-grid">
+    <block wx:for="{{testModes}}" wx:key="id">
+      <view 
+        class="test-card" 
+        data-id="{{item.id}}" 
+        bindtap="navigateToTest"
+      >
+        <view class="card-content">
+          <text class="card-icon">{{item.icon}}</text>
+          <view class="card-info">
+            <text class="card-title">{{item.title}}</text>
+            <text class="card-subtitle">{{item.subtitle}}</text>
+          </view>
+        </view>
+        <view class="card-score" wx:if="{{bestScores[item.id]}}">
+          <text class="score-label">最佳</text>
+          <text class="score-value">{{bestScores[item.id]}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="footer">
+    <text class="footer-text">点击卡片开始测试</text>
+  </view>
+</view>

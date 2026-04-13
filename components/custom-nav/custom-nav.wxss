@@ -1,0 +1,53 @@
+/* Academia/Classical Custom Navigation Bar */
+.custom-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #251E19;
+  border-bottom: 1rpx solid #4A3F35;
+  z-index: 9999;
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  position: relative;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80rpx;
+  height: 64rpx;
+}
+
+.back-icon {
+  font-size: 56rpx;
+  font-weight: 300;
+  color: #C9A962;
+  line-height: 1;
+  padding-bottom: 8rpx;
+}
+
+.nav-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #E8DFD4;
+  font-family: 'STSong', 'SimSun', 'Songti SC', serif;
+  white-space: nowrap;
+  max-width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-right {
+  height: 64rpx;
+}

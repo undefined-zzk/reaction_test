@@ -1,0 +1,72 @@
+<custom-nav title="设置" showBack="{{true}}"></custom-nav>
+
+<view class="container" style="padding-top: {{navBarHeight}}px;">
+  <view class="header">
+    <text class="subtitle">个性化你的测试体验</text>
+  </view>
+
+  <view class="settings-section">
+    <view class="section-title">基础设置</view>
+    
+    <view class="setting-item">
+      <view class="setting-info">
+        <text class="setting-name">震动反馈</text>
+        <text class="setting-desc">测试时提供震动反馈</text>
+      </view>
+      <switch 
+        checked="{{settings.vibration}}" 
+        bindchange="toggleVibration"
+        color="#C9A962"
+      />
+    </view>
+
+    <view class="setting-item">
+      <view class="setting-info">
+        <text class="setting-name">音效</text>
+        <text class="setting-desc">测试时播放音效</text>
+      </view>
+      <switch 
+        checked="{{settings.sound}}" 
+        bindchange="toggleSound"
+        color="#C9A962"
+      />
+    </view>
+  </view>
+
+  <view class="stats-section" wx:if="{{stats}}">
+    <view class="section-title">数据统计</view>
+    
+    <view class="stats-card">
+      <view class="stat-row" bindtap="openStats" data-type="reaction">
+        <text class="stat-label">视觉反应最佳</text>
+        <text class="stat-value">{{bestScoresFormatted.reaction || '未测试'}}</text>
+      </view>
+      <view class="stat-row" bindtap="openStats" data-type="cps">
+        <text class="stat-label">手速测试最佳</text>
+        <text class="stat-value">{{bestScoresFormatted.cps || '未测试'}}</text>
+      </view>
+      <view class="stat-row" bindtap="openStats" data-type="memory">
+        <text class="stat-label">方块记忆最高</text>
+        <text class="stat-value">{{memoryLevel > 0 ? 'Level ' + memoryLevel : '未测试'}}</text>
+      </view>
+      <view class="stat-row" bindtap="openStats" data-type="stroop">
+        <text class="stat-label">文字干扰最高</text>
+        <text class="stat-value">{{bestScoresFormatted.stroop || '未测试'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="danger-section">
+    <view class="section-title">危险操作</view>
+    
+    <view class="danger-item" bindtap="clearAllData">
+      <text class="danger-text">清除所有数据</text>
+      <text class="danger-icon">⚠️</text>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text class="footer-text">反应力测试助手</text>
+    <text class="footer-copyright">© 2024 Reaction Test Lab</text>
+  </view>
+</view>

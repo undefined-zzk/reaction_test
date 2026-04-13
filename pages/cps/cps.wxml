@@ -1,0 +1,44 @@
+<custom-nav title="手速测试" showBack="{{true}}"></custom-nav>
+
+<view class="container" style="padding-top: {{navBarHeight}}px;">
+  <view class="main-area" bindtap="handleClick">
+    <view class="ready-area" wx:if="{{status === 'ready'}}">
+      <text class="ready-icon">👆</text>
+      <text class="ready-text">点击开始测试</text>
+      <text class="ready-hint">测试你在10秒内的点击速度</text>
+    </view>
+
+    <view class="countdown-display" wx:if="{{status === 'countdown'}}">
+      <text class="countdown-number">{{countdown}}</text>
+      <text class="countdown-hint">准备开始</text>
+    </view>
+
+    <view class="testing-area" wx:if="{{status === 'testing'}}">
+      <text class="test-data">点击次数: {{clickCount}}</text>
+      <text class="test-data">CPS: {{cpsDisplay}}</text>
+      <text class="test-data">剩余时间: {{countdown}}s</text>
+      <text class="test-hint">疯狂点击屏幕！</text>
+    </view>
+
+    <view class="result-area" wx:if="{{status === 'result' && result}}">
+      <text class="result-cps">{{result.cpsDisplay || '0.0'}} <text class="unit">CPS</text></text>
+      <text class="result-grade" style="color: {{result.grade.color}}">{{result.grade.description}}</text>
+      <view class="stats-row">
+        <text class="stat-text">{{result.clicks}} 次点击</text>
+        <text class="stat-text">{{result.timeDisplay || '10.0'}} 秒</text>
+      </view>
+      <view class="new-best" wx:if="{{isNewBest}}">
+        <text class="new-best-text">🎉 新纪录！</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="action-buttons" wx:if="{{status === 'result'}}">
+    <view class="btn btn-primary" bindtap="resetTest">
+      <text class="btn-text">再测一次</text>
+    </view>
+    <view class="btn btn-secondary" catchtap="navigateToResult">
+      <text class="btn-text">查看详情</text>
+    </view>
+  </view>
+</view>

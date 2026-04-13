@@ -1,0 +1,82 @@
+<custom-nav title="视觉反应测试" showBack="{{true}}"></custom-nav>
+
+<scroll-view
+  class="container {{status}}"
+  style="background-color: {{backgroundColor}}; padding-top: {{navBarHeight}}px;"
+  scroll-y
+  enable-passive-event="{{false}}"
+>
+  <view class="tap-area" catchtap="onContainerTap" wx:if="{{status !== 'final'}}"></view>
+  
+  <view class="header">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{currentTest / 5 * 100}}%"></view>
+    </view>
+    <view class="header-info">
+      <text class="round-text">{{currentTest || 0}}/5</text>
+    </view>
+  </view>
+
+  <view class="content">
+    <view class="instruction-section" wx:if="{{status === 'ready'}}">
+      <text class="guide-title">👁️ 视觉反应测试</text>
+      <view class="guide-text">
+        <text class="guide-desc">• 点击屏幕开始测试</text>
+        <text class="guide-desc">• 背景变色时立即点击</text>
+        <text class="guide-desc">• 共进行5轮测试</text>
+        <text class="guide-desc">• 系统会记录你的反应时间</text>
+        <text class="guide-desc">• 数据越低越好</text>
+      </view>
+    </view>
+    <view class="instruction-section" wx:if="{{status !== 'ready'}}">
+      <text class="instruction">{{instruction}}</text>
+    </view>
+
+    <view class="result-section" wx:if="{{result && status !== 'final'}}">
+      <view class="result-time">
+        <text class="time-value">{{result.time || 0}}</text>
+        <text class="time-unit">ms</text>
+      </view>
+    </view>
+
+    <view class="stats-section" wx:if="{{status === 'final' && stats}}">
+      <view class="stat-card main-stat">
+        <text class="stat-label">平均</text>
+        <text class="stat-value">{{stats.avg || 0}}<text class="unit">ms</text></text>
+      </view>
+
+      <view class="stats-row">
+        <view class="stat-card">
+          <text class="stat-label">最高</text>
+          <text class="stat-value">{{stats.max || 0}}<text class="unit">ms</text></text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-label">最低</text>
+          <text class="stat-value">{{stats.min || 0}}<text class="unit">ms</text></text>
+        </view>
+      </view>
+
+      <view class="result-grade" wx:if="{{result && result.grade}}" style="color: {{result.grade.color}}">
+        <text class="grade-text">{{result.grade.description}}</text>
+      </view>
+
+      <view class="new-best" wx:if="{{isNewBest}}">
+        <text class="new-best-text">新纪录</text>
+      </view>
+    </view>
+
+    <view class="action-buttons" wx:if="{{status === 'final'}}">
+      <view class="btn btn-primary" catchtap="navigateToResult">
+        <text class="btn-text">详情</text>
+      </view>
+      <view class="btn btn-secondary" catchtap="shareResult">
+        <text class="btn-text">分享成绩</text>
+      </view>
+      <view class="btn btn-secondary" catchtap="resetAll">
+        <text class="btn-text">再测一次</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<canvas canvas-id="shareCanvas" style="position: fixed; width: 540px; height: 720px; left: -9999px; top: -9999px;"></canvas>

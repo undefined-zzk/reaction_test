@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "设置",
+  "navigationBarBackgroundColor": "#1C1714",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "backgroundColor": "#1C1714",
+  "usingComponents": {
+    "custom-nav": "/components/custom-nav/custom-nav"
+  }
+}
