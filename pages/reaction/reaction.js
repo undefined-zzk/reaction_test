@@ -361,40 +361,62 @@ Page({
     const isNewBest = this.data.isNewBest
     const avgTime = stats ? stats.avg : 0
 
-    ctx.fillStyle = '#667eea'
+    // 背景色 - 深桃花心木
+    ctx.fillStyle = '#1C1714'
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
-    ctx.fillStyle = '#ffffff'
+    // 添加古橡木色装饰边框
+    ctx.fillStyle = '#251E19'
+    ctx.fillRect(20, 20, canvasWidth - 40, canvasHeight - 40)
+
+    // 黄铜色边框
+    ctx.strokeStyle = '#C9A962'
+    ctx.lineWidth = 2
+    ctx.strokeRect(20, 20, canvasWidth - 40, canvasHeight - 40)
+
+    // 标题 - 羊皮纸色
+    ctx.fillStyle = '#E8DFD4'
     ctx.font = 'bold 32px Arial'
     ctx.textAlign = 'center'
-    ctx.fillText('反应力测试助手', canvasWidth / 2, 80)
+    ctx.fillText('反应力测试助手', canvasWidth / 2, 100)
 
+    // 测试类型
     ctx.font = '24px Arial'
-    ctx.fillText('视觉反应测试', canvasWidth / 2, 140)
+    ctx.fillStyle = '#9C8B7A'
+    ctx.fillText('视觉反应测试', canvasWidth / 2, 150)
 
-    ctx.font = 'bold 48px Arial'
-    ctx.fillStyle = '#ffd700'
-    ctx.fillText(avgTime + 'ms', canvasWidth / 2, 260)
+    // 得分 - 黄铜色
+    ctx.font = 'bold 56px Arial'
+    ctx.fillStyle = '#C9A962'
+    ctx.fillText(avgTime + 'ms', canvasWidth / 2, 280)
 
+    // 新记录标记 - 图书馆深红
     if (isNewBest) {
-      ctx.fillStyle = '#ff6b6b'
-      ctx.font = 'bold 28px Arial'
-      ctx.fillText('新记录！', canvasWidth / 2, 320)
+      ctx.fillStyle = '#8B2635'
+      ctx.fillRect(canvasWidth / 2 - 100, 310, 200, 50)
+      ctx.fillStyle = '#C9A962'
+      ctx.font = 'bold 24px Arial'
+      ctx.fillText('🎉 新记录', canvasWidth / 2, 345)
     }
 
     const maxTime = stats ? stats.max : 0
     const minTime = stats ? stats.min : 0
 
-    ctx.fillStyle = '#ffffff'
-    ctx.font = '16px Arial'
-    ctx.fillText('最高: ' + maxTime + 'ms  |  最低: ' + minTime + 'ms', canvasWidth / 2, 370)
-
+    // 统计信息
+    ctx.fillStyle = '#9C8B7A'
     ctx.font = '18px Arial'
-    ctx.fillText('我的平均反应速度是' + avgTime + 'ms', canvasWidth / 2, 440)
-    ctx.fillText('快来挑战我吧！', canvasWidth / 2, 480)
+    const yOffset = isNewBest ? 400 : 350
+    ctx.fillText('最高: ' + maxTime + 'ms  |  最低: ' + minTime + 'ms', canvasWidth / 2, yOffset)
 
+    // 分享文案 - 羊皮纸色
+    ctx.fillStyle = '#E8DFD4'
+    ctx.font = '20px Arial'
+    ctx.fillText('我的平均反应速度是 ' + avgTime + 'ms', canvasWidth / 2, yOffset + 60)
+    ctx.fillText('快来挑战我吧！', canvasWidth / 2, yOffset + 100)
+
+    // 底部提示
     ctx.font = '16px Arial'
-    ctx.fillStyle = 'rgba(255,255,255,0.7)'
+    ctx.fillStyle = '#9C8B7A'
     ctx.fillText('反应力测试助手', canvasWidth / 2, 680)
 
     ctx.draw(false, () => {

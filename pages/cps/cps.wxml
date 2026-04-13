@@ -1,7 +1,7 @@
 <custom-nav title="手速测试" showBack="{{true}}"></custom-nav>
 
 <view class="container" style="padding-top: {{navBarHeight}}px;">
-  <view class="main-area" bindtap="handleClick">
+  <view class="main-area" bindtap="handleClick" hover-class="none">
     <view class="ready-area" wx:if="{{status === 'ready'}}">
       <text class="ready-icon">👆</text>
       <text class="ready-text">点击开始测试</text>
@@ -22,7 +22,7 @@
 
     <view class="result-area" wx:if="{{status === 'result' && result}}">
       <text class="result-cps">{{result.cpsDisplay || '0.0'}} <text class="unit">CPS</text></text>
-      <text class="result-grade" style="color: {{result.grade.color}}">{{result.grade.description}}</text>
+      <text class="result-grade">{{result.grade.description}}</text>
       <view class="stats-row">
         <text class="stat-text">{{result.clicks}} 次点击</text>
         <text class="stat-text">{{result.timeDisplay || '10.0'}} 秒</text>

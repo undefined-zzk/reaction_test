@@ -7,13 +7,22 @@
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40rpx;
   background: #251E19;
   border-bottom: 1rpx solid #4A3F35;
   position: relative;
+  padding-left: 40rpx;
+  padding-bottom: 40rpx;
+}
+
+.header-spacer {
+  width: 100%;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 /* Corner Flourishes for Header */
@@ -64,8 +73,8 @@
 }
 
 .settings-btn {
-  width: 80rpx;
-  height: 80rpx;
+  width: 64rpx;
+  height: 64rpx;
   background: transparent;
   border: 2rpx solid #C9A962;
   border-radius: 50%;
@@ -73,6 +82,7 @@
   align-items: center;
   justify-content: center;
   transition: all 300ms ease-out;
+  flex-shrink: 0;
 }
 
 .settings-btn:active {

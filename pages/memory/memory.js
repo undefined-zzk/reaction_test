@@ -312,6 +312,106 @@ Page({
     })
   },
 
+  shareResult() {
+    this.generateShareImage()
+  },
+
+  generateShareImage() {
+    const ctx = wx.createCanvasContext('shareCanvas', this)
+    const canvasWidth = 540
+    const canvasHeight = 720
+
+    const level = this.data.level - 1
+    const score = this.data.score
+    const isNewBest = this.data.isNewBest
+
+    // 背景色 - 深桃花心木
+    ctx.fillStyle = '#1C1714'
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight)
+
+    // 添加古橡木色装饰边框
+    ctx.fillStyle = '#251E19'
+    ctx.fillRect(20, 20, canvasWidth - 40, canvasHeight - 40)
+
+    // 黄铜色边框
+    ctx.strokeStyle = '#C9A962'
+    ctx.lineWidth = 2
+    ctx.strokeRect(20, 20, canvasWidth - 40, canvasHeight - 40)
+
+    // 标题 - 羊皮纸色
+    ctx.fillStyle = '#E8DFD4'
+    ctx.font = 'bold 32px Arial'
+    ctx.textAlign = 'center'
+    ctx.fillText('反应力测试助手', canvasWidth / 2, 100)
+
+    // 测试类型
+    ctx.font = '24px Arial'
+    ctx.fillStyle = '#9C8B7A'
+    ctx.fillText('方块记忆测试', canvasWidth / 2, 150)
+
+    // 关卡 - 黄铜色
+    ctx.font = 'bold 56px Arial'
+    ctx.fillStyle = '#C9A962'
+    ctx.fillText('Level ' + level, canvasWidth / 2, 280)
+
+    // 新记录标记 - 图书馆深红
+    if (isNewBest) {
+      ctx.fillStyle = '#8B2635'
+      ctx.fillRect(canvasWidth / 2 - 100, 310, 200, 50)
+      ctx.fillStyle = '#C9A962'
+      ctx.font = 'bold 24px Arial'
+      ctx.fillText('🎉 新记录', canvasWidth / 2, 345)
+    }
+
+    // 得分信息
+    ctx.fillStyle = '#9C8B7A'
+    ctx.font = '18px Arial'
+    const yOffset = isNewBest ? 400 : 350
+    ctx.fillText('总得分: ' + score, canvasWidth / 2, yOffset)
+
+    // 分享文案 - 羊皮纸色
+    ctx.fillStyle = '#E8DFD4'
+    ctx.font = '20px Arial'
+    ctx.fillText('我通过了 Level ' + level + ' 记忆测试', canvasWidth / 2, yOffset + 60)
+    ctx.fillText('快来挑战我吧！', canvasWidth / 2, yOffset + 100)
+
+    // 底部提示
+    ctx.font = '16px Arial'
+    ctx.fillStyle = '#9C8B7A'
+    ctx.fillText('反应力测试助手', canvasWidth / 2, 680)
+
+    ctx.draw(false, () => {
+      setTimeout(() => {
+        wx.canvasToTempFilePath({
+          canvasId: 'shareCanvas',
+          success: (res) => {
+            this.shareImage(res.tempFilePath)
+          },
+          fail: (err) => {
+            console.error('转换为图片失败:', err)
+            wx.showToast({
+              title: '生成分享图失败',
+              icon: 'error'
+            })
+          }
+        }, this)
+      }, 100)
+    })
+  },
+
+  shareImage(imagePath) {
+    wx.showShareImageMenu({
+      path: imagePath,
+      entrancePath: '/pages/index/index',
+      success(res) {
+        console.log('分享成功', res)
+      },
+      fail(err) {
+        console.error('分享失败', err)
+      }
+    })
+  },
+
   goBack () {
     wx.navigateBack()
   },

@@ -1,11 +1,14 @@
 <view class="container">
   <view class="header" style="padding-right: {{headerRight}}px;">
-    <view class="title-section">
-      <text class="main-title">反应力测试助手</text>
-      <text class="subtitle">测试你的极限反应速度</text>
-    </view>
-    <view class="settings-btn" bindtap="navigateToSettings">
-      <text class="settings-icon">⚙️</text>
+    <view class="header-spacer" style="height: {{capsuleTop}}px;"></view>
+    <view class="header-content" style="height: {{capsuleHeight}}px;">
+      <view class="title-section">
+        <text class="main-title">反应力测试助手</text>
+        <text class="subtitle">测试你的极限反应速度</text>
+      </view>
+      <view class="settings-btn" bindtap="navigateToSettings">
+        <text class="settings-icon">⚙️</text>
+      </view>
     </view>
   </view>
 

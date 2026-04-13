@@ -1,6 +1,9 @@
 <custom-nav title="文字干扰测试" showBack="{{true}}"></custom-nav>
 
 <view class="container" style="padding-top: {{navBarHeight}}px;">
+  <!-- 隐藏的canvas用于生成分享图片 -->
+  <canvas canvas-id="shareCanvas" style="position: fixed; width: 540px; height: 720px; left: -9999px; top: -9999px;"></canvas>
+
   <view class="header">
     <view class="progress-bar">
       <view class="progress-fill" style="width: {{round / maxRounds * 100}}%"></view>
@@ -77,6 +80,9 @@
   <view class="action-buttons" wx:if="{{status === 'result'}}">
     <view class="btn btn-primary" bindtap="resetTest">
       <text class="btn-text">再测一次</text>
+    </view>
+    <view class="btn btn-secondary" catchtap="shareResult">
+      <text class="btn-text">分享成绩</text>
     </view>
     <view class="btn btn-secondary" catchtap="navigateToResult">
       <text class="btn-text">查看详情</text>

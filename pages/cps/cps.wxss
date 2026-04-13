@@ -22,8 +22,9 @@
   user-select: none;
   -webkit-user-select: none;
   cursor: pointer;
-  transition: transform 150ms ease-out, border-color 300ms ease-out;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
 }
 
 /* Corner Flourishes */
@@ -35,7 +36,6 @@
   height: 32rpx;
   border: 2rpx solid #C9A962;
   opacity: 0.6;
-  transition: opacity 300ms ease-out;
 }
 
 .main-area::before {
@@ -50,16 +50,6 @@
   right: -1rpx;
   border-left: none;
   border-top: none;
-}
-
-.main-area:active {
-  transform: scale(0.99);
-  border-color: rgba(201, 169, 98, 0.5);
-}
-
-.main-area:active::before,
-.main-area:active::after {
-  opacity: 1;
 }
 
 .countdown-display {
@@ -186,6 +176,7 @@
   font-weight: 500;
   font-family: 'Cormorant Garamond', 'STSong', serif;
   text-shadow: 1rpx 1rpx 1rpx rgba(0, 0, 0, 0.4), -1rpx -1rpx 1rpx rgba(255, 255, 255, 0.1);
+  color: #C9A962;
 }
 
 .stats-row {
@@ -233,11 +224,6 @@
   padding: 24rpx 48rpx;
   border-radius: 8rpx;
   text-align: center;
-  transition: all 300ms ease-out;
-}
-
-.btn:active {
-  transform: scale(0.98);
 }
 
 .btn-primary {
@@ -245,18 +231,9 @@
   box-shadow: inset 0 1rpx 0 rgba(255, 255, 255, 0.2), inset 0 -1rpx 0 rgba(0, 0, 0, 0.2), 0 4rpx 16rpx rgba(0, 0, 0, 0.3);
 }
 
-.btn-primary:active {
-  box-shadow: inset 0 2rpx 4rpx rgba(0, 0, 0, 0.3);
-}
-
 .btn-secondary {
   background: transparent;
   border: 2rpx solid #C9A962;
-}
-
-.btn-secondary:active {
-  background: #8B2635;
-  border-color: #8B2635;
 }
 
 .btn-text {
@@ -272,10 +249,6 @@
 .btn-secondary .btn-text {
   color: #C9A962;
   text-shadow: none;
-}
-
-.btn-secondary:active .btn-text {
-  color: #E8DFD4;
 }
 
 @media screen and (max-width: 750rpx) {

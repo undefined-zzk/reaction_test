@@ -1,6 +1,9 @@
 <custom-nav title="方块记忆" showBack="{{true}}"></custom-nav>
 
 <scroll-view class="container" scroll-y style="padding-top: {{navBarHeight}}px;">
+  <!-- 隐藏的canvas用于生成分享图片 -->
+  <canvas canvas-id="shareCanvas" style="position: fixed; width: 540px; height: 720px; left: -9999px; top: -9999px;"></canvas>
+
   <view class="header" wx:if="{{status !== 'ready'}}">
     <view class="level-badge">
       <text class="level-text">Level {{level}}</text>
@@ -70,6 +73,9 @@
     </view>
     <view class="btn btn-primary" bindtap="resetGame">
       <text class="btn-text">重新开始</text>
+    </view>
+    <view class="btn btn-secondary" catchtap="shareResult">
+      <text class="btn-text">分享成绩</text>
     </view>
     <view class="btn btn-secondary" catchtap="navigateToResult">
       <text class="btn-text">查看详情</text>

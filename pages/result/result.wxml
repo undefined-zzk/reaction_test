@@ -6,17 +6,16 @@
 
   <view class="header">
     <text class="title">{{type === 'reaction' ? '视觉反应' : type === 'cps' ? '手速测试' : type === 'memory' ? '方块记忆' : '文字干扰'}}</text>
-    <text class="subtitle">测试结果</text>
   </view>
 
   <view class="result-card">
-    <view class="score-section">
+    <view class="score-section" wx:if="{{!isHistoryView}}">
       <view class="score-main">
         <text class="score-value">{{displayScore}}</text>
         <text class="score-unit">{{scoreUnit}}</text>
       </view>
-      <view class="grade-section" wx:if="{{grade}}" style="background: {{grade.color}}20">
-        <text class="grade-text" style="color: {{grade.color}}">{{grade.description}}</text>
+      <view class="grade-section" wx:if="{{grade}}">
+        <text class="grade-text">{{grade.description}}</text>
       </view>
       <view class="new-best-badge" wx:if="{{isNewBest}}">
         <text class="badge-text">🎉 新纪录</text>
@@ -74,6 +73,12 @@
     <view class="btn btn-primary" bindtap="retryTest">
       <text class="btn-text">再测一次</text>
     </view>
+    <view class="btn btn-secondary" bindtap="shareResult">
+      <text class="btn-text">分享成绩</text>
+    </view>
+  </view>
+
+  <view class="action-buttons" wx:if="{{isHistoryView}}">
     <view class="btn btn-secondary" bindtap="shareResult">
       <text class="btn-text">分享成绩</text>
     </view>

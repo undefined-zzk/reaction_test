@@ -4,7 +4,8 @@ Page({
   data: {
     navBarHeight: 88,
     statusBarHeight: 20,
-    capsuleRight: 0,
+    capsuleTop: 0,
+    capsuleHeight: 32,
     headerRight: 180,
     testModes: [
       {
@@ -61,10 +62,14 @@ Page({
     const statusBarHeight = systemInfo.statusBarHeight || 20
     const navHeight = menuButton.height + (menuButton.top - statusBarHeight) * 2
     const navBarHeight = statusBarHeight + navHeight
+    const capsuleTop = menuButton.top
+    const capsuleHeight = menuButton.height
     
     this.setData({
       statusBarHeight,
-      navBarHeight
+      navBarHeight,
+      capsuleTop,
+      capsuleHeight
     })
   },
 

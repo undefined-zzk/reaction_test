@@ -268,43 +268,87 @@ Page({
     const canvasWidth = 540
     const canvasHeight = 720
 
-    // 背景色
-    ctx.fillStyle = '#667eea'
+    // 如果是历史视图，使用最佳成绩数据
+    let displayScore, scoreUnit, isNewBest, isHistoryBest
+    if (this.data.isHistoryView && this.data.bestScore) {
+      displayScore = this.data.bestScore.displayScore
+      scoreUnit = this.data.bestScore.unit
+      isNewBest = false
+      isHistoryBest = true
+    } else {
+      displayScore = this.data.displayScore
+      scoreUnit = this.data.scoreUnit
+      isNewBest = this.data.isNewBest
+      isHistoryBest = false
+    }
+
+    // 背景色 - 深桃花心木
+    ctx.fillStyle = '#1C1714'
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
-    // 标题
-    ctx.fillStyle = '#ffffff'
+    // 添加古橡木色装饰边框
+    ctx.fillStyle = '#251E19'
+    ctx.fillRect(20, 20, canvasWidth - 40, canvasHeight - 40)
+
+    // 黄铜色边框
+    ctx.strokeStyle = '#C9A962'
+    ctx.lineWidth = 2
+    ctx.strokeRect(20, 20, canvasWidth - 40, canvasHeight - 40)
+
+    // 标题 - 羊皮纸色
+    ctx.fillStyle = '#E8DFD4'
     ctx.font = 'bold 32px Arial'
     ctx.textAlign = 'center'
-    ctx.fillText('反应力测试助手', canvasWidth / 2, 80)
+    ctx.fillText('反应力测试助手', canvasWidth / 2, 100)
 
     // 测试类型
     const testTitle = this.getTestTitle(this.data.type)
     ctx.font = '24px Arial'
-    ctx.fillText(testTitle, canvasWidth / 2, 140)
+    ctx.fillStyle = '#9C8B7A'
+    ctx.fillText(testTitle, canvasWidth / 2, 150)
 
-    // 得分
-    ctx.font = 'bold 48px Arial'
-    ctx.fillStyle = '#ffd700'
-    ctx.fillText(this.data.displayScore + this.data.scoreUnit, canvasWidth / 2, 280)
+    // 得分 - 黄铜色
+    ctx.font = 'bold 56px Arial'
+    ctx.fillStyle = '#C9A962'
+    ctx.fillText(displayScore + scoreUnit, canvasWidth / 2, 280)
 
-    // 新记录标记
-    if (this.data.isNewBest) {
-      ctx.fillStyle = '#ff6b6b'
-      ctx.font = 'bold 28px Arial'
-      ctx.fillText('🎉 新记录！', canvasWidth / 2, 350)
+    // 历史最佳标记 - 黄铜色边框
+    if (isHistoryBest) {
+      ctx.strokeStyle = '#C9A962'
+      ctx.lineWidth = 2
+      ctx.strokeRect(canvasWidth / 2 - 100, 310, 200, 50)
+      ctx.fillStyle = '#C9A962'
+      ctx.font = 'bold 24px Arial'
+      ctx.fillText('🏆 历史最佳', canvasWidth / 2, 345)
     }
 
-    // 分享文案
-    ctx.fillStyle = '#ffffff'
-    ctx.font = '18px Arial'
-    ctx.fillText('我在' + testTitle + '中得了', canvasWidth / 2, 450)
-    ctx.fillText(this.data.displayScore + this.data.scoreUnit, canvasWidth / 2, 490)
-    ctx.fillText('快来挑战我吧！', canvasWidth / 2, 530)
+    // 新记录标记 - 图书馆深红
+    if (isNewBest) {
+      ctx.fillStyle = '#8B2635'
+      ctx.fillRect(canvasWidth / 2 - 100, 310, 200, 50)
+      ctx.fillStyle = '#C9A962'
+      ctx.font = 'bold 24px Arial'
+      ctx.fillText('🎉 新记录', canvasWidth / 2, 345)
+    }
+
+    // 分享文案 - 羊皮纸色
+    ctx.fillStyle = '#E8DFD4'
+    ctx.font = '20px Arial'
+    const yOffset = (isNewBest || isHistoryBest) ? 420 : 370
+    
+    if (isHistoryBest) {
+      ctx.fillText('我的' + testTitle + '历史最佳成绩', canvasWidth / 2, yOffset)
+      ctx.fillText(displayScore + scoreUnit, canvasWidth / 2, yOffset + 40)
+      ctx.fillText('快来挑战我吧！', canvasWidth / 2, yOffset + 80)
+    } else {
+      ctx.fillText('我在' + testTitle + '中得了', canvasWidth / 2, yOffset)
+      ctx.fillText(displayScore + scoreUnit, canvasWidth / 2, yOffset + 40)
+      ctx.fillText('快来挑战我吧！', canvasWidth / 2, yOffset + 80)
+    }
 
     // 底部提示
     ctx.font = '16px Arial'
-    ctx.fillStyle = 'rgba(255,255,255,0.7)'
+    ctx.fillStyle = '#9C8B7A'
     ctx.fillText('反应力测试助手', canvasWidth / 2, 680)
 
     ctx.draw(false, () => {
