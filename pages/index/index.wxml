@@ -37,4 +37,20 @@
   <view class="footer">
     <text class="footer-text">点击卡片开始测试</text>
   </view>
+
+  <view class="more-section">
+    <text class="more-title">更多好玩的</text>
+    <text class="finger-icon">👇</text>
+  </view>
+
+  <view class="mini-program-card" bindtap="navigateToMiniProgram">
+    <view class="mini-program-content">
+      <text class="mini-program-icon">🎡</text>
+      <view class="mini-program-info">
+        <text class="mini-program-title">日常转盘</text>
+        <text class="mini-program-subtitle">让转盘帮你做决定</text>
+      </view>
+      <text class="mini-program-arrow">→</text>
+    </view>
+  </view>
 </view>

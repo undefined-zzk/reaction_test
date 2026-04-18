@@ -131,6 +131,24 @@ Page({
     })
   },
 
+  navigateToMiniProgram () {
+    wx.vibrateShort({ type: 'light' })
+    wx.navigateToMiniProgram({
+      appId: 'wx3104a8a7e1ed35cb',
+      path: '',
+      success: () => {
+        console.log('跳转成功')
+      },
+      fail: (err) => {
+        console.error('跳转失败', err)
+        wx.showToast({
+          title: '跳转失败，请稍后重试',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
   onShareAppMessage () {
     return {
       title: '反应力测试助手 - 测试你的极限反应速度！',
