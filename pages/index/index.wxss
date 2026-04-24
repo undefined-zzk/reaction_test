@@ -393,3 +393,7 @@
   margin-top: 32rpx;
   display: block;
 }
+
+.bottom-spacer {
+  height: 80rpx;
+}
